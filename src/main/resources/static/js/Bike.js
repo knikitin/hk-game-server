@@ -6,6 +6,8 @@ function Bike(x, y, xVelocity, yVelocity, color) {
   this.trail = [];
 
   this.color = color;
+
+  this.id = null;
 }
 
 /**

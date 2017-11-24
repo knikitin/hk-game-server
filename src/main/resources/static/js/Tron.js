@@ -2,53 +2,70 @@ const SCL = 5; // pixel-scale of each tile
 
 var player1, player2;
 
-        function initialize() {
-            const eventSource = new EventSource('/commands');
-            eventSource.onmessage = e => {
-                const msg = JSON.parse(e.data);
+var gameState = "wait"
+
+function setPlayerVelocityFromCmd(player, cmd){
+    switch (cmd) {
+      case "left":
+        player.setVelocity(createVector(-1, 0));
+        break;
+      case "up":
+        player.setVelocity(createVector(0, -1));
+        break;
+      case "right":
+        player.setVelocity(createVector(1, 0));
+        break;
+      case "down":
+        player.setVelocity(createVector(0, 1));
+        break;
+    }
+}
+
+function initialize() {
+    const eventSource = new EventSource('/commands');
+    eventSource.onmessage = e => {
+        const msg = JSON.parse(e.data);
+        if (msg.id != null) {
+            if (gameState == "wait") {
+                if (player1.id == null) {
+                    player1.id = msg.id;
+                    document.getElementById("player1").innerHTML = msg.id;
+                } else if (player1.id != msg.id) {
+                    player2.id = msg.id;
+                    document.getElementById("player2").innerHTML = msg.id;
+                    gameState = "started";
+                    text("Start game", width / 2, height / 2);
+                }
+            } else {
                 document.getElementById("userId").innerHTML = msg.id;
                 document.getElementById("command").innerHTML = msg.cmd;
 
                 switch (msg.id) {
-                  case "id1":
-                    player = player1;
+                  case player1.id:
+                    setPlayerVelocityFromCmd(player1, msg.cmd);
                     break;
-                  case "id2":
-                    player = player2;
-                    break;
-                }
-
-                switch (msg.cmd) {
-                  case "left":
-                    player.setVelocity(createVector(-1, 0));
-                    break;
-                  case "up":
-                    player.setVelocity(createVector(0, -1));
-                    break;
-                  case "right":
-                    player.setVelocity(createVector(1, 0));
-                    break;
-                  case "down":
-                    player.setVelocity(createVector(0, 1));
+                  case player2.id:
+                    setPlayerVelocityFromCmd(player2, msg.cmd);
                     break;
                 }
-
-            };
-
-            eventSource.onopen = e => console.log('open');
-            eventSource.onerror = e => {
-                if (e.readyState == EventSource.CLOSED) {
-                    console.log('close');
-                }
-                else {
-                    console.log(e);
-                }
-            };
-
-            eventSource.addEventListener('second', function(e) {
-                  console.log('second', e.data);
-                }, false);
+            }
         }
+    };
+
+    eventSource.onopen = e => console.log('open');
+    eventSource.onerror = e => {
+        if (e.readyState == EventSource.CLOSED) {
+            console.log('close');
+        }
+        else {
+            console.log(e);
+        }
+    };
+
+    eventSource.addEventListener('second', function(e) {
+          console.log('second', e.data);
+        }, false);
+}
 
 
 
@@ -67,7 +84,9 @@ function setup() {
 function draw() {
     background(51);
 
-	handlePlayers();
+    if (gameState == "started"){
+	 handlePlayers();
+    }
 }
 
 /**
