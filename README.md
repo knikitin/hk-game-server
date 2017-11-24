@@ -1,5 +1,7 @@
 # Game server
 
+The test server work on 9101 port. 
+
 The server have the next endoints:
 
 ##### Put commands to server
@@ -23,3 +25,6 @@ GET /commands
     id : String,
     cmd : String,
 }
+
+### List of commands
+left, right, up, down
