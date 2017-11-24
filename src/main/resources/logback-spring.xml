@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <springProfile name="dev">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>gs-dev.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>gs-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>5MB</maxFileSize>
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>gs-prod.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>gs-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>5MB</maxFileSize>
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>
