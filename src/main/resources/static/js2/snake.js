@@ -394,9 +394,6 @@ function init()
                   newGame();
               }
           } else {
-              document.getElementById("userId").innerHTML = msg.id;
-              document.getElementById("command").innerHTML = msg.cmd;
-
               switch (msg.id) {
                 case player1:
                  movePlayer1(msg.cmd);
