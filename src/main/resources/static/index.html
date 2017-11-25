@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Server Memory Monitor</title>
-        <script type="text/javascript" src="/js/p5.min.js"></script>
-        <script type="text/javascript" src="/js/Tron.js"></script>
-        <script type="text/javascript" src="/js/Bike.js"></script>
+    <title>Snake game</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="/js/p5.min.js"></script>
+    <script type="text/javascript" src="/js/Tron.js"></script>
+    <script type="text/javascript" src="/js/Bike.js"></script>
 </head>
 <body>
-<h1>User command</h1>
-
-<h3>User</h3>
-<div id="userId"></div>
-
-<h3>Command</h3>
-<div id="command"></div>
-
-<h1>Gamers</h1>
-
-<h3>Player 1</h3>
-<div id="player1"></div>
-
-<h3>Player 2</h3>
-<div id="player2"></div>
-
+<table class="table table-bordered">
+    <tr>
+        <td colspan="2" class="text-center"><h1>Snake game</h1></td>
+    </tr>
+    <tr>
+        <td id="player1" style="width:50%">_</td>
+        <td id="player2" style="width:50%" class="text-right">_</td>
+    </tr>
+</table>
 
 </body>
 </html>

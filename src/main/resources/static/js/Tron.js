@@ -30,15 +30,17 @@ function initialize() {
                 if (player1.id == null) {
                     player1.id = msg.id;
                     document.getElementById("player1").innerHTML = msg.id;
+                    document.getElementById("player1").className = "info";
                 } else if (player1.id != msg.id) {
                     player2.id = msg.id;
                     document.getElementById("player2").innerHTML = msg.id;
+                    document.getElementById("player2").className = "danger text-right";
                     gameState = "started";
                     text("Start game", width / 2, height / 2);
                 }
             } else {
-                document.getElementById("userId").innerHTML = msg.id;
-                document.getElementById("command").innerHTML = msg.cmd;
+                console.log('userId: ' + msg.id);
+                console.log('command: ' + msg.cmd);
 
                 switch (msg.id) {
                   case player1.id:
@@ -71,9 +73,11 @@ function initialize() {
 
 function setup() {
 
-  createCanvas(500, 500);
+  clientWidth = Math.floor(document.body.clientWidth / SCL ) * SCL ;
+  clientHeight = 700;
+  createCanvas(clientWidth, clientHeight);
 
-  frameRate(1);
+  frameRate(5);
 
 	/* initialize players */
   player1 = new Bike(50 / SCL, height / 2 / SCL, 1, 0, color("#0000FF"));
