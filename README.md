@@ -28,3 +28,9 @@ GET /commands
 
 ### List of commands
 left, right, up, down
+
+## Related repositories
+
+- [TensorFlow controller](https://github.com/KirillNikonov/hk-tf-android-client)
+- [Sphinx server](https://github.com/watsondoc/SphinxTcpStreamRecognizer)
+- [Sphinx controller](https://github.com/AlexandrShur/mic-transfer)
